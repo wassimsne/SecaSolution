@@ -8,6 +8,6 @@
         public string? Ip { get; set; }
         public int Port { get; set; }
         public EtatBorne Etat { get; set; }
-        public int IdProp { get; set; }
+        public int? IdProp { get; set; }
     }
 }

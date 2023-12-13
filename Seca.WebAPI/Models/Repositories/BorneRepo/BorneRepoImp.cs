@@ -173,7 +173,9 @@ namespace Seca.WebAPI.Models.Repositories.BorneRepo
                     newBorne.Port = Convert.ToInt32(row[2]);
                     EtatBorne.TryParse(Convert.IsDBNull(row[3]) ? null : (String)(row[3]),true, out EtatBorne result);
                     newBorne.Etat = result;
-                   
+                    newBorne.IdProp = Convert.IsDBNull(row[4]) ? (int?)null : Convert.ToInt32(row[4]);
+
+
                     listeBorne.Add(newBorne);
                 }
 

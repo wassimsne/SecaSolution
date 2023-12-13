@@ -23,8 +23,8 @@ namespace Seca.WebAPI.Controllers
         public IActionResult AjouterBorne(Borne borne)
         {
 
-            _DBBorne.AddBorne(borne);
-            return Ok();
+            
+            return Ok(_DBBorne.AddBorne(borne));
 
         }
         [HttpGet]
