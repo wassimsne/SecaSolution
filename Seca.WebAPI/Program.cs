@@ -1,7 +1,7 @@
 using Seca.WebAPI.Models.Repositories.BorneRepo;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddSignalR();
 // Add services to the container.
 
 builder.Services.AddControllers();

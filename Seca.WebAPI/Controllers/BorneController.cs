@@ -1,17 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
+using Seca.WebAPI.Hubs;
 using Seca.WebAPI.Models.Domaine;
 using Seca.WebAPI.Models.Repositories.BorneRepo;
 using Seca.WebAPI.Models.Repositories.Connexion;
 
 namespace Seca.WebAPI.Controllers
 {
+    
+
     [ApiController]
     [Route("[Controller]")]
     public class BorneController : Controller
     {
 
         IDAOBorne _DBBorne;
+        private readonly IHubContext<DataHub> hubContext;
         public BorneController(IDAOBorne dbBorne)
         {
 
@@ -47,6 +52,7 @@ namespace Seca.WebAPI.Controllers
         {
 
             _DBBorne.UpdateBorne(borne);
+            await hubContext.Clients.All.SendAsync("MachineAdded", borne);
 
             return Ok(borne); /*NoContent();*/
         }
