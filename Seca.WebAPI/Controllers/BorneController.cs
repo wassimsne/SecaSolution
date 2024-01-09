@@ -17,10 +17,11 @@ namespace Seca.WebAPI.Controllers
 
         IDAOBorne _DBBorne;
         private readonly IHubContext<DataHub> hubContext;
-        public BorneController(IDAOBorne dbBorne)
+        public BorneController(IDAOBorne dbBorne,IHubContext<DataHub> hub)
         {
 
             _DBBorne = dbBorne;
+            hubContext = hub;
             
         }
 
@@ -46,12 +47,12 @@ namespace Seca.WebAPI.Controllers
             return Ok(_DBBorne.GetBorneById(idborne));
         }
 
-        [HttpPut]
-        [Route("/Update")]
-        public async Task<IActionResult> Update( Borne borne)
+        [HttpPut("{id:int}")]
+        
+        public async Task<IActionResult> Update(int id, Borne borne)
         {
 
-            _DBBorne.UpdateBorne(borne);
+            _DBBorne.UpdateBorne(id,borne);
             await hubContext.Clients.All.SendAsync("MachineAdded", borne);
 
             return Ok(borne); /*NoContent();*/

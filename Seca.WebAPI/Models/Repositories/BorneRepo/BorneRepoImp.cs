@@ -128,13 +128,13 @@ namespace Seca.WebAPI.Models.Repositories.BorneRepo
                 throw new RepoException();
             }
         }
-        public bool UpdateBorne(Borne borne)
+        public bool UpdateBorne(int id,Borne borne)
         {
             try
             {
                 _command.Parameters.Clear();
                 String req = "update  borne set ip=@IP,port=@Port,etat=@Etat" +
-                    "        where idborne =" + borne.Id;
+                    "        where idborne =" + id;
                 _command.Parameters.AddWithValue("@IP", borne.Ip);
                 _command.Parameters.AddWithValue("@Port", borne.Port);
                 _command.Parameters.AddWithValue("@Etat", borne.Etat.ToString());
